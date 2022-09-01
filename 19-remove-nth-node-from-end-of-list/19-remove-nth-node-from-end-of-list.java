@@ -11,26 +11,22 @@
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
         
-        if(head == null || head.next == null) return null;
-        //finding the size of the linkedList
-        int size = 0;
-        ListNode node = head;
-        while(node != null){
-            size++;
-            node = node.next;
+        if(head == null) return null;
+        
+        ListNode dummy = new ListNode();
+        dummy.next = head;
+        ListNode slow = dummy;
+        ListNode fast = dummy;
+        
+        for(int i = 0; i <= n; i++){
+            fast = fast.next;
         }
         
-        
-        int count = size - n;
-        //deleting the 1st node
-        if(count == 0){
-            return head.next;
+        while(fast != null){
+            fast = fast.next;
+            slow = slow.next;
         }
-        node = head; //we have iterated through this node pointer to know the size, so it will be                                               pointing to the last node
-        while(count-- > 1){
-            node = node.next;
-        }
-          node.next = node.next.next; 
-         return head;
+        slow.next = slow.next.next;
+        return dummy.next;
     }
 }
