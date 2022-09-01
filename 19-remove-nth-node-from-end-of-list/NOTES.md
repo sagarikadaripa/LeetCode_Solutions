@@ -1,4 +1,4 @@
-**Approach 1**
+# Approach 1
 
 1. Find the size of the linkedList
 int size = 0;
