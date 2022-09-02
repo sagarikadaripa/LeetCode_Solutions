@@ -32,3 +32,11 @@ boolean ans = isPalindrome(arr,size);
 return ans;
 }
 ```
+​
+# Approach2
+1. Find the mid of the linkedList and break it into two halves.
+1->2->NULL          2->1->NULL
+2. Reverse the 2nd halve of the linkedList
+(head)1->2->NULL     NULL<-2<-1(head)
+3. Compare the elements in both the list starting from the head
+4. If the nodes are unequal return false else return true
