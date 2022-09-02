@@ -9,32 +9,41 @@
  * }
  */
 class Solution {
-    public boolean isPalindrome(int arr[],int n){
+    public ListNode reverse(ListNode head){
         
-        for(int i = 0 ;i <= n/2;i++){
-            if(arr[i] != arr[n-i-1])
-                return false;
+        ListNode pre = null;
+        while(head != null){
+            ListNode next = head.next;
+            head.next = pre;
+            pre = head;
+            head = next;
         }
-        return true;
+        return pre;
     }
     public boolean isPalindrome(ListNode head) {
-         //find the size of the LinkedList
-        int size = 0;
-        ListNode node = head;
-        while(node != null){
-            size++;
-            node = node.next;
+        //Find the mid
+        ListNode slow = head;
+        ListNode fast = head;
+        
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        node = head;
-        //Storing the value of the linkedList into an array
-        int arr[] = new int[size];
-        int i = 0;
-        while(node != null){
-            arr[i] = node.val;
-            i++;
-            node = node.next;
+        //now slow points to the mid
+        
+        //1-> 2-> 3->NULL
+        if(fast != null) slow = slow.next;
+        
+        //Reverse the list
+        ListNode revHead = reverse(slow);
+        while(revHead != null){
+            if(revHead.val != head.val) return false;
+            else{
+                //increment the pointer
+                revHead = revHead.next;
+                head = head.next;
+            }
         }
-        boolean ans = isPalindrome(arr,size);
-        return ans;
+        return true;
     }
 }
